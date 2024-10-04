@@ -137,6 +137,70 @@ CubeState& CubeState::r2()
 
     swap(_corners[1], _corners[6]);
     swap(_corners[2], _corners[5]);
+
+    return *this;
+}
+
+CubeState& CubeState::r3()
+{
+    uint8_t temp = _edges[1];
+    _edges[1] = flip(_edges[5]);
+    _edges[5] = flip(_edges[9]);
+    _edges[9] = flip(_edges[6]);
+    _edges[6] = flip(temp);
+
+    temp = _corners[1];
+    _corners[1] = clockwise(_corners[5]);
+    _corners[5] = counterClockwise(_corners[6]);
+    _corners[6] = clockwise(_corners[2]);
+    _corners[2] = counterClockwise(temp);
+
+    return *this;
+}
+
+CubeState& CubeState::f()
+{
+    uint8_t temp = _edges[2];
+    _edges[2] = _edges[7];
+    _edges[7] = _edges[10];
+    _edges[10] = _edges[6];
+    _edges[6] = temp;
+
+    temp = _corners[2];
+    _corners[2] = clockwise(_corners[3]);
+    _corners[3] = counterClockwise(_corners[7]);
+    _corners[7] = clockwise(_corners[6]);
+    _corners[6] = counterClockwise(temp);
+
+    return *this;
+}
+
+CubeState& CubeState::f2()
+{
+    swap(_edges[2], _edges[10]);
+    swap(_edges[6], _edges[7]);
+
+    swap(_corners[3], _corners[6]);
+    swap(_corners[2], _corners[7]);
+
+    return *this;
+}
+
+CubeState& CubeState::f3()
+{
+    uint8_t temp = _edges[2];
+    _edges[2] = _edges[6];
+    _edges[6] = _edges[10];
+    _edges[10] = _edges[7];
+    _edges[7] = temp;
+
+    temp = _corners[2];
+    _corners[2] = clockwise(_corners[6]);
+    _corners[6] = counterClockwise(_corners[7]);
+    _corners[7] = clockwise(_corners[3]);
+    _corners[3] = counterClockwise(temp);
+
+    return *this;
 }
 
 
