@@ -12,7 +12,7 @@ CubeState::CubeState()
     }
 }
 
-CubeState::CubeState(array<uint8_t, 12> edge, array<uint8_t, 8> corner)
+CubeState::CubeState(std::array<uint8_t, 12> edge, std::array<uint8_t, 8> corner)
 {
     for (int i = 0; i < 12; i++)
     {
@@ -24,11 +24,11 @@ CubeState::CubeState(array<uint8_t, 12> edge, array<uint8_t, 8> corner)
     }
 }
 
-array<uint8_t, 12> CubeState::getEdges()
+std::array<uint8_t, 12> CubeState::getEdges()
 {   
     return _edges;
 }
-array<uint8_t, 8> CubeState::getCorners()
+std::array<uint8_t, 8> CubeState::getCorners()
 {
     return _corners;
 }
@@ -87,11 +87,11 @@ CubeState& CubeState::u() // Edge Change:   {0, 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10, 
 
 CubeState& CubeState::u2()
 {
-    swap(_edges[0], _edges[2]);
-    swap(_edges[1], _edges[3]);
+    std::swap(_edges[0], _edges[2]);
+    std::swap(_edges[1], _edges[3]);
 
-    swap(_corners[0], _corners[2]);
-    swap(_corners[1], _corners[3]);
+    std::swap(_corners[0], _corners[2]);
+    std::swap(_corners[1], _corners[3]);
 
     return *this;
 }
@@ -132,11 +132,11 @@ CubeState& CubeState::r()
 
 CubeState& CubeState::r2()
 {
-    swap(_edges[1], _edges[9]);
-    swap(_edges[5], _edges[6]);
+    std::swap(_edges[1], _edges[9]);
+    std::swap(_edges[5], _edges[6]);
 
-    swap(_corners[1], _corners[6]);
-    swap(_corners[2], _corners[5]);
+    std::swap(_corners[1], _corners[6]);
+    std::swap(_corners[2], _corners[5]);
 
     return *this;
 }
@@ -177,11 +177,11 @@ CubeState& CubeState::f()
 
 CubeState& CubeState::f2()
 {
-    swap(_edges[2], _edges[10]);
-    swap(_edges[6], _edges[7]);
+    std::swap(_edges[2], _edges[10]);
+    std::swap(_edges[6], _edges[7]);
 
-    swap(_corners[3], _corners[6]);
-    swap(_corners[2], _corners[7]);
+    std::swap(_corners[3], _corners[6]);
+    std::swap(_corners[2], _corners[7]);
 
     return *this;
 }
@@ -203,4 +203,138 @@ CubeState& CubeState::f3()
     return *this;
 }
 
+CubeState& CubeState::d() 
+{
 
+    uint8_t temp = _edges[8];
+    _edges[8] = _edges[9];
+    _edges[9] = _edges[10];
+    _edges[10] = _edges[11];
+    _edges[11] = temp;
+
+    temp = _corners[4];
+    _corners[4] = _corners[5];
+    _corners[5] = _corners[6];
+    _corners[6] = _corners[7];
+    _corners[7] = temp;
+
+    return *this;
+}
+
+CubeState& CubeState::d2()
+{
+    std::swap(_edges[8], _edges[10]);
+    std::swap(_edges[9], _edges[11]);
+
+    std::swap(_corners[4], _corners[6]);
+    std::swap(_corners[5], _corners[7]);
+
+    return *this;
+}
+
+CubeState& CubeState::d3()
+{
+    uint8_t temp = _edges[8];
+    _edges[8] = _edges[11];
+    _edges[11] = _edges[10];
+    _edges[10] = _edges[9];
+    _edges[9] = temp;
+
+    temp = _corners[4];
+    _corners[4] = _corners[7];
+    _corners[7] = _corners[6];
+    _corners[6] = _corners[5];
+    _corners[5] = temp;
+
+    return *this;
+}
+
+CubeState& CubeState::l()
+{
+    uint8_t temp = _edges[3];
+    _edges[3] = flip(_edges[4]);
+    _edges[4] = flip(_edges[11]);
+    _edges[11] = flip(_edges[7]);
+    _edges[7] = flip(temp);
+
+    temp = _corners[0];
+    _corners[0] = counterClockwise(_corners[4]);
+    _corners[4] = clockwise(_corners[7]);
+    _corners[7] = counterClockwise(_corners[3]);
+    _corners[3] = clockwise(temp);
+
+    return *this;
+}
+
+CubeState& CubeState::l2()
+{
+    std::swap(_edges[3], _edges[11]);
+    std::swap(_edges[4], _edges[7]);
+
+    std::swap(_corners[0], _corners[7]);
+    std::swap(_corners[3], _corners[4]);
+
+    return *this;   
+}
+
+CubeState& CubeState::l3()
+{
+    uint8_t temp = _edges[3];
+    _edges[3] = flip(_edges[7]);
+    _edges[7] = flip(_edges[11]);
+    _edges[11] = flip(_edges[4]);
+    _edges[4] = flip(temp);
+
+    temp = _corners[0];
+    _corners[0] = counterClockwise(_corners[3]);
+    _corners[3] = clockwise(_corners[7]);
+    _corners[7] = counterClockwise(_corners[4]);
+    _corners[4] = clockwise(temp);
+
+    return *this;
+}
+
+CubeState& CubeState::b()
+{
+    uint8_t temp = _edges[0];
+    _edges[0] = _edges[5];
+    _edges[5] = _edges[8];
+    _edges[8] = _edges[4];
+    _edges[4] = temp;
+
+    temp = _corners[0];
+    _corners[0] = clockwise(_corners[1]);
+    _corners[1] = counterClockwise(_corners[5]);
+    _corners[5] = clockwise(_corners[4]);
+    _corners[4] = counterClockwise(temp);
+
+    return *this;
+}
+
+CubeState& CubeState::b2()
+{
+    std::swap(_edges[0], _edges[8]);
+    std::swap(_edges[4], _edges[5]);
+
+    std::swap(_corners[0], _corners[5]);
+    std::swap(_corners[1], _corners[4]);
+
+    return *this;
+}
+
+CubeState& CubeState::b3()
+{
+    uint8_t temp = _edges[0];
+    _edges[0] = _edges[4];
+    _edges[4] = _edges[8];
+    _edges[8] = _edges[5];
+    _edges[5] = temp;
+
+    temp = _corners[0];
+    _corners[0] = clockwise(_corners[4]);
+    _corners[4] = counterClockwise(_corners[5]);
+    _corners[5] = clockwise(_corners[1]);
+    _corners[1] = counterClockwise(temp);
+
+    return *this;
+}

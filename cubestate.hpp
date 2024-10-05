@@ -32,20 +32,18 @@ twisted clockwise, its index would be 11.
 #include <array>
 #include <cstdint>
 
-using namespace std;
-
 class CubeState
 {
     private:
         // Arrays to store edge piece and corner piece indeces.
-        array<uint8_t, 12> _edges; 
-        array<uint8_t, 8> _corners;
+        std::array<uint8_t, 12> _edges; 
+        std::array<uint8_t, 8> _corners;
     public:
         CubeState();
-        CubeState(array<uint8_t, 12> edge, array<uint8_t, 8> corner);
+        CubeState(std::array<uint8_t, 12> edge, std::array<uint8_t, 8> corner);
 
-        array<uint8_t, 12> getEdges();
-        array<uint8_t, 8> getCorners();
+        std::array<uint8_t, 12> getEdges();
+        std::array<uint8_t, 8> getCorners();
 
         uint8_t flip(uint8_t edgeInd);
         uint8_t clockwise(uint8_t cornerInd);

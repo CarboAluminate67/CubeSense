@@ -1,10 +1,32 @@
-/* IDA* double ended search with pruning tables to find optimal solution for rubiks cube.  */
+/* 
+IDA* double ended search with pruning tables to find optimal solution for rubiks cube.  
+*/
 
 #include <iostream>
 
-#include "cubestate.hpp""
+#include "cubestate.hpp"
 
-void main()
+using namespace std;
+
+int main()
 {
-    std::cout << "Hello, World!";
+    CubeState cube;
+    array<uint8_t, 12> edges;
+    array<uint8_t, 8> corners;
+    edges = cube.getEdges();
+    corners = cube.getCorners();
+
+    cout << "Edge array: \n";
+    for (uint8_t i = 0; i < 12; i++)
+    {
+        cout << edges[i] << " ";
+    }
+
+    cout << "\n Corner array: \n";
+    for (uint8_t i = 0; i < 8; i++)
+    {
+        cout << corners[i] << " "; 
+    }
+
+    return 0;
 }
