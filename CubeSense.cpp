@@ -15,16 +15,18 @@ int main()
     edges = cube.getEdges();
     corners = cube.getCorners();
 
+
+
     cout << "Edge array: \n";
     for (unsigned i = 0; i < 12; i++)
     {
-        cout << edges[i] << " ";
+        cout << unsigned(edges[i]) << " ";
     }
 
-    cout << "\n Corner array: \n";
+    cout << "\nCorner array: \n";
     for (unsigned i = 0; i < 8; i++)
     {
-        cout << corners[i] << " ";
+        cout << unsigned(corners[i]) << " ";
     }
 
 
