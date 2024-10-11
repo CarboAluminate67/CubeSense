@@ -2,6 +2,7 @@
 IDA* double ended search with pruning tables to find optimal solution for rubiks cube.
 */
 #include <iostream>
+#include <array>
 
 #include "./CubeState.h"
 
@@ -10,25 +11,17 @@ using namespace std;
 int main()
 {
     CubeState cube;
-    array<uint8_t, 12> edges;
-    array<uint8_t, 8> corners;
-    edges = cube.getEdges();
-    corners = cube.getCorners();
 
-
-
-    cout << "Edge array: \n";
-    for (unsigned i = 0; i < 12; i++)
+    // Cube State and turning tests
+    
+    array<string, 25> moves = { "U", "B'", "D2", "U", "B", "U'", "R", "B", "U2", "B2", "F", "R2", "U", "D'", "R2", "B'", "U", "L'", "U2", "D2", "F2", "U2", "L2", "U'", "D" };
+    for (string move : moves)
     {
-        cout << unsigned(edges[i]) << " ";
+        cube.move(cube._moves[move]);
     }
 
-    cout << "\nCorner array: \n";
-    for (unsigned i = 0; i < 8; i++)
-    {
-        cout << unsigned(corners[i]) << " ";
-    }
 
+    cube.display();
 
     return 0;
 }

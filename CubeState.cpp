@@ -1,4 +1,5 @@
 #include "CubeState.h"
+#include <iostream>
 
 CubeState::CubeState()
 {
@@ -67,6 +68,69 @@ bool CubeState::solvedState()
     return true;
 }
 
+void CubeState::display()
+{
+    std::cout << "Edge array: \n";
+    for (unsigned i = 0; i < 12; i++)
+    {
+        std::cout << unsigned(_edges[i]) << " ";
+    }
+
+    std::cout << "\nCorner array: \n";
+    for (unsigned i = 0; i < 8; i++)
+    {
+        std::cout << unsigned(_corners[i]) << " ";
+    }
+}
+
+std::list<std::string> CubeState::solveCorners()
+{
+
+}
+
+CubeState& CubeState::move(int move)
+{
+    switch (move)
+    {
+        case 0:
+            return this->u();
+        case 1:
+            return this->u2();
+        case 2:
+            return this->u3();
+        case 3:
+            return this->r();
+        case 4:
+            return this->r2();
+        case 5:
+            return this->r3();
+        case 6:
+            return this->f();
+        case 7:
+            return this->f2();
+        case 8:
+            return this->f3();
+        case 9:
+            return this->d();
+        case 10:
+            return this->d2();
+        case 11:
+            return this->d3();
+        case 12:
+            return this->l();
+        case 13:
+            return this->l2();
+        case 14:
+            return this->l3();
+        case 15:
+            return this->b();
+        case 16:
+            return this->b2();
+        case 17:
+            return this->b3();
+    }
+}
+
 CubeState& CubeState::u() // Edge Change:   {0, 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10, 11} -> {3, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11}
 {                         // Corner Change: {0, 1, 2, 3, 4, 5, 6, 7}                -> {3, 0, 1, 2, 4, 5, 6, 7}
 
@@ -107,7 +171,7 @@ CubeState& CubeState::u3()
     temp = _corners[0];
     _corners[0] = _corners[1];
     _corners[1] = _corners[2];
-    _corners[3] = _corners[3];
+    _corners[2] = _corners[3];
     _corners[3] = temp;
 
     return *this;

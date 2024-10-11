@@ -30,6 +30,9 @@ twisted clockwise, its index would be 11.
 */
 
 #include <array>
+#include <string>
+#include <map>
+#include <list>
 #include <cstdint>
 
 class CubeState
@@ -39,6 +42,27 @@ private:
     std::array<uint8_t, 12> _edges;
     std::array<uint8_t, 8> _corners;
 public:
+    std::map<std::string, int> _moves = {
+        {"U", 0},
+        {"U2", 1},
+        {"U'", 2},
+        {"R", 3},
+        {"R2", 4},
+        {"R'", 5},
+        {"F", 6},
+        {"F2", 7},
+        {"F'", 8},
+        {"D", 9},
+        {"D2", 10},
+        {"D'", 11},
+        {"L", 12},
+        {"L2", 13},
+        {"L'", 14},
+        {"B", 15},
+        {"B2", 16},
+        {"B'", 17},
+    };
+
     CubeState();
     CubeState(std::array<uint8_t, 12> edge, std::array<uint8_t, 8> corner);
 
@@ -50,6 +74,12 @@ public:
     uint8_t counterClockwise(uint8_t cornerInd);
 
     bool solvedState();
+
+    void display();
+
+    std::list<std::string> solveCorners();
+
+    CubeState& move(int move);
 
     CubeState& u();
     CubeState& u2();
