@@ -83,11 +83,6 @@ void CubeState::display()
     }
 }
 
-std::list<std::string> CubeState::solveCorners()
-{
-
-}
-
 CubeState& CubeState::move(int move)
 {
     switch (move)
@@ -129,6 +124,7 @@ CubeState& CubeState::move(int move)
         case 17:
             return this->b3();
     }
+    return *this;
 }
 
 CubeState& CubeState::u() // Edge Change:   {0, 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10, 11} -> {3, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11}

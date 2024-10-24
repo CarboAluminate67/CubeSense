@@ -29,6 +29,9 @@ index 5. But if it were in the UFL position (normally Yellow-Green-Red), and
 twisted clockwise, its index would be 11.
 */
 
+#ifndef CubeState_HEADER
+#define CubeState_HEADER
+
 #include <array>
 #include <string>
 #include <map>
@@ -77,8 +80,6 @@ public:
 
     void display();
 
-    std::list<std::string> solveCorners();
-
     CubeState& move(int move);
 
     CubeState& u();
@@ -106,3 +107,5 @@ public:
     CubeState& b3();
 
 };
+
+#endif 
