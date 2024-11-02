@@ -3,6 +3,7 @@ IDA* double ended search with pruning tables to find optimal solution for rubiks
 */
 #include <iostream>
 #include <array>
+#include <vector>
 
 #include "./CubeState.h"
 #include "./CornerPatternDB.h"
@@ -11,17 +12,28 @@ using namespace std;
 
 int main()
 {
+
     CubeState cube;
+    CornerPatternDB cornerDB(&cube);
 
     // Testing
-    
-    CornerPatternDB cornerDB(&cube);
+
+    cube.u();
+    cube.r();
+    cube.b3();
+    cube.l();
+    cube.d2();
 
     cube.display();
 
-    cube.r();
+    cout << endl << setprecision(10) << cornerDB.getIndex(cube.getCorners());
 
-    cout << "\n\n" << cornerDB.getIndex();
+    cornerDB.generateVector();
+
+    cornerDB.loadVector("CornerPatternDatabase.bin");
+
+
+    cout << endl << cornerDB.cornerVector[4337539];
 
     return 0;
 }
