@@ -24,12 +24,36 @@
     <ClCompile Include="CornerPatternDB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MovePruner.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EdgePatternDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PatternDB.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Searcher.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CubeState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CornerPatternDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MovePruner.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EdgePatternDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PatternDB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Searcher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

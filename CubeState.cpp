@@ -1,6 +1,7 @@
 #include "CubeState.h"
 #include <iostream>
 
+// Default solved state
 CubeState::CubeState()
 {
     for (unsigned i = 0; i < 12; i++)
@@ -13,6 +14,7 @@ CubeState::CubeState()
     }
 }
 
+// Initializes cube based on scrambled arrays
 CubeState::CubeState(std::array<uint8_t, 12> edge, std::array<uint8_t, 8> corner)
 {
     for (int i = 0; i < 12; i++)
@@ -25,6 +27,7 @@ CubeState::CubeState(std::array<uint8_t, 12> edge, std::array<uint8_t, 8> corner
     }
 }
 
+// Getters
 std::array<uint8_t, 12> CubeState::getEdges()
 {
     return _edges;
@@ -34,6 +37,7 @@ std::array<uint8_t, 8> CubeState::getCorners()
     return _corners;
 }
 
+// Update orientations of pieces
 uint8_t CubeState::flip(uint8_t edgeInd)
 {
     return (edgeInd + 12) % 24;
@@ -49,6 +53,7 @@ uint8_t CubeState::counterClockwise(uint8_t cornerInd)
     return (cornerInd + 16) % 24;
 }
 
+// Checks if cube is solved
 bool CubeState::solvedState()
 {
     for (int i = 0; i < 12; i++)
@@ -68,7 +73,8 @@ bool CubeState::solvedState()
     return true;
 }
 
-void CubeState::display()
+// Displays cube arrays
+void CubeState::displayArrays()
 {
     std::cout << "Edge array: \n";
     for (unsigned i = 0; i < 12; i++)
@@ -83,6 +89,31 @@ void CubeState::display()
     }
 }
 
+/*Displays cubes in color notation(color and orientation of one piece at a time)
+* With green facing front and yellow facing up, it begins in Upper-Back-Left 
+* (normally Yellow-Blue-Red), and follows a clockwise circle for the top-face
+* corner pieces, then mirrors the same pieces on the bottom face, ending on Bottom-Front-Left.
+ */
+void CubeState::displayColors()
+{
+    std::cout << "Corners: ";
+    for (int i = 0; i < 8; i++)
+    {
+        std::cout << _cornerIndexToColors[_corners[i] % 8] << "-" << floor(_corners[i] / 8);
+        std::cout << ", ";
+    }
+    std::cout << std::endl;
+    
+    std::cout << "Edges: ";
+    for (int i = 0; i < 12; i++)
+    {
+        std::cout << _edgeIndexToColors[_edges[i] % 12] << "-" << floor(_edges[i] / 12);
+        std::cout << ", ";
+    }
+    std::cout << std::endl;
+}
+
+// Converts ints to moves
 CubeState& CubeState::move(int move)
 {
     switch (move)
@@ -127,6 +158,10 @@ CubeState& CubeState::move(int move)
     return *this;
 }
 
+/*Move functions, Swaps pieces individually and then updates orientation accordingly
+* All quarter turn f, l, r, and b moves rotate 2 corners clockwise and the other 2 counter
+* clockwise. All quarter turn l and r moves flip involved edges. 
+*/
 CubeState& CubeState::u() // Edge Change:   {0, 1, 2, 3, 4, 5, 6 , 7, 8, 9, 10, 11} -> {3, 0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11}
 {                         // Corner Change: {0, 1, 2, 3, 4, 5, 6, 7}                -> {3, 0, 1, 2, 4, 5, 6, 7}
 

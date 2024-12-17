@@ -32,6 +32,8 @@ twisted clockwise, its index would be 11.
 #ifndef CubeState_HEADER
 #define CubeState_HEADER
 
+#pragma once
+
 #include <array>
 #include <string>
 #include <map>
@@ -40,12 +42,33 @@ twisted clockwise, its index would be 11.
 
 class CubeState
 {
-private:
+public:
     // Arrays to store edge piece and corner piece indeces.
     std::array<uint8_t, 12> _edges;
     std::array<uint8_t, 8> _corners;
-public:
-    std::map<std::string, int> _moves = {
+
+    std::map<uint8_t, std::string> _moves = {
+        {0, "U"},
+        {1, "U2"},
+        {2, "U'"},
+        {3, "R"},
+        {4, "R2"},
+        {5, "R'"},
+        {6, "F"},
+        {7, "F2"},
+        {8, "F'"},
+        {9, "D"},
+        {10, "D2"},
+        {11, "D'"},
+        {12, "L"},
+        {13, "L2"},
+        {14, "L'"},
+        {15, "B"},
+        {16, "B2"},
+        {17, "B'"}
+    };
+
+    std::map<std::string, uint8_t> _movesToInt = {
         {"U", 0},
         {"U2", 1},
         {"U'", 2},
@@ -63,7 +86,59 @@ public:
         {"L'", 14},
         {"B", 15},
         {"B2", 16},
-        {"B'", 17},
+        {"B'", 17}
+    };
+
+    std::map<uint8_t, std::string> _cornerIndexToColors = {
+        {0, "YBR"},
+        {1, "YBO"},
+        {2, "YGO"},
+        {3, "YGR"},
+        {4, "WBR"},
+        {5, "WBO"},
+        {6, "WGO"},
+        {7, "WGR"}
+    };
+
+    std::map<uint8_t, std::string> _edgeIndexToColors = {
+        {0, "YB"},
+        {1, "YO"},
+        {2, "YG"},
+        {3, "YR"},
+        {4, "BR"},
+        {5, "BO"},
+        {6, "GO"},
+        {7, "GR"},
+        {8, "WB"},
+        {9, "WO"},
+        {10, "WG"},
+        {11, "WR"}
+    };
+
+    std::map<std::string, uint8_t> _cornerColorsToIndex = {
+        {"YBR", 0},
+        {"YBO", 1},
+        {"YGO", 2},
+        {"YGR", 3},
+        {"WBR", 4},
+        {"WBO", 5},
+        {"WGO", 6},
+        {"WGR", 7}
+    };
+
+    std::map<std::string, uint8_t> _edgeColorsToIndex = {
+        {"YB", 0},
+        {"YO", 1},
+        {"YG", 2},
+        {"YR", 3},
+        {"BR", 4},
+        {"BO", 5},
+        {"GO", 6},
+        {"GR", 7},
+        {"WB", 8},
+        {"WO", 9},
+        {"WG", 10},
+        {"WR", 11}
     };
 
     CubeState();
@@ -78,7 +153,8 @@ public:
 
     bool solvedState();
 
-    void display();
+    void displayArrays();
+    void displayColors();
 
     CubeState& move(int move);
 

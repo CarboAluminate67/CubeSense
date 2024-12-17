@@ -130,10 +130,18 @@
     <ClCompile Include="CornerPatternDB.cpp" />
     <ClCompile Include="CubeSense.cpp" />
     <ClCompile Include="CubeState.cpp" />
+    <ClCompile Include="EdgePatternDB.cpp" />
+    <ClCompile Include="MovePruner.cpp" />
+    <ClCompile Include="PatternDB.cpp" />
+    <ClCompile Include="Searcher.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CornerPatternDB.h" />
     <ClInclude Include="CubeState.h" />
+    <ClInclude Include="EdgePatternDB.h" />
+    <ClInclude Include="MovePruner.h" />
+    <ClInclude Include="PatternDB.h" />
+    <ClInclude Include="Searcher.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
